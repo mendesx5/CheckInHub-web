@@ -1,0 +1,27 @@
+import type { User } from '../types/user'
+
+const TOKEN_KEY = 'checkinhub:token'
+const USER_KEY = 'checkinhub:user'
+
+export function getStoredToken(): string | null {
+  return localStorage.getItem(TOKEN_KEY)
+}
+
+export function getStoredUser(): User | null {
+  try {
+    const raw = localStorage.getItem(USER_KEY)
+    return raw ? (JSON.parse(raw) as User) : null
+  } catch {
+    return null
+  }
+}
+
+export function storeSession(token: string, user: User) {
+  localStorage.setItem(TOKEN_KEY, token)
+  localStorage.setItem(USER_KEY, JSON.stringify(user))
+}
+
+export function clearSession() {
+  localStorage.removeItem(TOKEN_KEY)
+  localStorage.removeItem(USER_KEY)
+}
