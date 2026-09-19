@@ -3,9 +3,10 @@ import { useAuth } from '../contexts/AuthContext'
 import type { UserRole } from '../types/user'
 
 /**
- * Proteção apenas de UX/navegação — NÃO é segurança real.
- * O backend ainda não valida permissões; a proteção real virá com
- * Spring Security no futuro.
+ * Proteção de UX/navegação (evita mostrar telas erradas e redireciona
+ * o usuário para a área certa). A segurança real já é feita pelo
+ * backend via Spring Security + JWT (role-based authorization) —
+ * esta rota apenas evita uma renderização desnecessária no client.
  */
 export default function RoleRoute({ allow }: { allow: UserRole[] }) {
   const { currentUser } = useAuth()
